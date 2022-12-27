@@ -34,8 +34,33 @@
 
     <script>
         function solution(arr){
-           
+            // sum과 arr의 i,j 합을 뺐을때 100이 나오면 된다.
+            /* 나의 풀이
+            const arr_sum = arr.reduce((acc,cur) => acc + cur , 0);
+            for(let i = 0; i < arr.length; i++){
+                for(let j = i + 1; j < arr.length; j++){
+                    let is_sum = arr_sum - (arr[i] + arr[j]);
+                    if(is_sum === 100){
+                        arr.splice(j, 1);
+                        arr.splice(i, 1);
+                        break;
+                    } 
+                }
+            }
+            return arr; */
 
+            //  풀이 해설
+                let answer=arr;
+                let sum=answer.reduce((a, b)=>a+b, 0);
+                for(let i=0; i<8; i++){
+                    for(let j=i+1; j<9; j++){
+                        if((sum-(answer[i]+answer[j]))==100){
+                            answer.splice(j, 1);
+                            answer.splice(i, 1);
+                        }
+                    }
+                }
+                return answer;
         }
         const arr = [20, 7, 23, 19, 10, 15, 25, 8, 13];
         console.log(solution(arr));
