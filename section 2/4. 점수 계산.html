@@ -43,6 +43,7 @@
 
     <script>
         function solution(arr){
+            /* 나의 풀이
             const answer = [];
             let num = 1;
             for(let i = 0; i < arr.length; i++){
@@ -55,6 +56,18 @@
                 }
             }
             return answer.reduce((acc, cur) => acc + cur , 0);
+            */
+            // 풀이 해설
+            let answer=0, cnt=0;
+                for(let x of arr){
+                    if(x===1){
+                        cnt++;
+                        answer+=cnt;
+                    }
+                    else cnt=0;
+                }
+                   
+                return answer;
         }
         const arr = [1, 0, 1, 1, 1, 0, 0, 1, 1, 0];
         console.log(solution(arr));
