@@ -28,16 +28,10 @@
 
     <script>
         function solution(arr){
-            const set = new Set(arr.slice());
-            const newArr = [...set].sort((a, b) => b - a);
-
-            const answer = arr.map((v, i) => {
-                v = newArr.indexOf(v) + 1;
-            });
-
+            
             return answer;
         }
-        const arr = [87, 89, 92, 100, 76]
+        const arr = [87, 89, 92, 100, 76];
         console.log(solution(arr));
     </script>
 </body>
