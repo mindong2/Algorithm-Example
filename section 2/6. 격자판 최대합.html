@@ -41,22 +41,58 @@
 
     <script>
         function solution(arr){
-            let answer = Number.MIN_SAFE_INTEGER;
-            let rowMax = Number.MIN_SAFE_INTEGER;
-            let colMax = Number.MIN_SAFE_INTEGER;
-            let diaMax = Number.MIN_SAFE_INTEGER;
+        /*나의 풀이
+            let sum1, sum2 = 0;
+            let temp = 0;
+            let answer = 0;
             
-            rowMax = arr.map(v => v.reduce((a,b) => a + b , 0)).sort()[0];
-
-            colMax = arr.map((v, i) => {
-                let colNum = Number.MIN_SAFE_INTEGER;
-                colNum += v[i];
-                if( colNum > colMax) {
-                    colMax = colNum;
+            // 행, 열 비교
+            for(let i = 0; i < arr.length; i++){
+                sum1 = 0;
+                sum2 = 0;
+                for(let j = 0; j < arr.length; j++){
+                    sum1 += arr[i][j]; //행의 합
+                    sum2 += arr[j][i]; // 열의 합
                 }
-                return colMax;
-            });
-            // return diaMax = arr.map(v => v.reduce((a,b) => a + b , 0)).sort()[0];
+                if(temp < Math.max(sum1, sum2)) {
+                    temp = Math.max(sum1, sum2);
+                }
+            } 
+            
+            sum1 = 0;
+            sum2 = 0;
+
+            // 행,열에서 최댓값과 대각선 값 비교
+            for(let i = 0; i < arr.length; i++){
+                sum1 += arr[i][i];
+                sum2 += arr[i][(arr.length - 1) - i];
+            }
+            answer = Math.max(temp, sum1, sum2);
+
+            return answer;
+        */
+
+        // 풀이 해석
+        
+        let answer=Number.MIN_SAFE_INTEGER;
+        let n=arr.length;
+        let sum1=sum2=0;
+        for(let i=0; i<n; i++){
+            sum1=sum2=0;
+            for(let j=0; j<n; j++){
+                sum1+=arr[i][j];
+                sum2+=arr[j][i];
+            }
+            answer=Math.max(answer, sum1, sum2);
+        }
+        sum1=sum2=0;
+        for(let i=0; i<n; i++){
+            sum1+=arr[i][i];
+            sum2+=arr[i][n-i-1];
+        }  
+        answer=Math.max(answer, sum1, sum2); 
+        return answer;
+
         }
         let arr=[[10, 13, 10, 12, 15], 
                  [12, 39, 30, 23, 11],
