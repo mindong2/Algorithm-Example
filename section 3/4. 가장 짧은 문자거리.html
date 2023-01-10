@@ -23,18 +23,45 @@
         ▣ 출력예제 1
         1 0 1 2 1 0 1 2 2 1 0
     </pre>
-
+    <!-- 배열내에서 왼 -> 오 갈때 거리와 오 -> 왼 갈때 거리 중 더 가까운 숫자를 넣어주는 문제 -->
     <script>
         function solution(str, t){
-            let answer = Array.from({length: str.length}, () => 1);
-            let i = 0;
-            while(true) {
-                let idx = str.indexOf(t, i);
-                console.log(idx);               
-                i++;
-                if(i >= str.length) break;
+            /* 나의 풀이
+            let p = 1000; // 비교를 위한 큰 수
+            let answer = [];
+            for(let i = 0; i < str.length; i++){
+                str.charAt(i) === t ? p = 0 : p += 1; 
+                answer[i] = p;
             }
-            return answer;
+            p = 1000;
+            for(let j = str.length - 1; j >= 0; j--){
+                str.charAt(j) === t ? p = 0 : p += 1; 
+                if(answer[j] >= p) answer[j] = p;
+            }
+            */
+
+            // 풀이 해설
+            let answer=[];
+            let p=1000;
+            for(let x of s){
+                if(x===t){
+                    p=0;
+                    answer.push(p);
+                }
+                else{
+                    p++;
+                    answer.push(p);
+                }
+            }
+            p=1000;
+            for(let i=s.length-1; i>=0; i--){
+                if(s[i]===t) p=0;
+                else{
+                    p++;
+                    answer[i]=Math.min(answer[i], p);
+                }
+            }
+            return answer;            
         }
         const str = 'teachermode';
         console.log(solution(str, 'e'));
