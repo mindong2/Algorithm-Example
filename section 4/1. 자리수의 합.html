@@ -29,10 +29,12 @@
 
     <script>
         function solution(arr){
+            /* 나의 풀이
             const answer = new Array();
             let newArr = arr.map(v => String(v).split(''));
             let sum = 0;
-
+            let solution = 0;
+            
             for(let i = 0; i < arr.length; i++){
                 for(let j = 0; j < newArr[i].length; j++){
                     newArr[i][j] = Number(newArr[i][j]);
@@ -41,8 +43,31 @@
                 answer.push(sum);
                 sum = 0;
             }
-
-            return answer;
+            const answer_num = answer.map((v, i) => {
+                if(v === Math.max(...answer)){
+                    if(solution < arr[i]) {
+                        solution = arr[i];
+                    }
+                }
+            })
+            */
+            // 풀이 해설
+            let solution, max=Number.MIN_SAFE_INTEGER;
+                for(let x of arr){
+                    let sum=0, tmp=x;
+                    while(tmp){
+                        sum+=(tmp%10);
+                        tmp=Math.floor(tmp/10);
+                    }
+                    if(sum>max){
+                        max=sum;
+                        solution=x;
+                    }
+                    else if(sum===max){
+                        if(x>solution) solution=x;
+                    }
+                }
+            return solution;
         }
         const arr = [128, 460, 603, 40, 521, 137, 123];
         console.log(solution(arr));
