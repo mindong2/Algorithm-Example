@@ -40,14 +40,16 @@
             let sum = 0;
             for(let i = 0; i < arr.length; i++){
                 arr[i] = Number(arr[i].toString().split('').reverse().join(''));
-                if(arr[i] === 1) continue; 
                 sqrt = Math.floor(Math.sqrt(arr[i])) + 1;
-                console.log(sqrt)
+                if(arr[i] === 1) continue; 
+                if(sqrt === 2){
+                    answer.push(arr[i]);
+                }
                 for(let j = 2; j <= sqrt; j++){
                     if(arr[i] % j === 0) {
                         break;
                     }else{
-                        if(j === sqrt - 1 || sqrt === 2){
+                        if(j === sqrt - 1){
                             answer.push(arr[i]);
                         }
                     }
