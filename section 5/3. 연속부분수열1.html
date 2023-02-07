@@ -32,21 +32,27 @@
 
     <script>
         function solution(m, arr){
-            let p1 = 0;
-            let p2 = arr.length - 1;
+            let left = 0;
+            let right = 0;
+            let sum = 0;
             let cnt = 0;
 
-            while(p1 !== p2){
-                if(arr[p1] === arr[p2]){
-                    cnt++;
-                    p1++;
-                }
+            while(left < arr.length){
+                if(right === arr.length){
+                    left++;
+                    right = left;
+                    sum = 0;
+                    continue;
+                };
 
-                if(arr[p1] + arr[2] > m){
-                    p1++;
-                }else{
-                    p2--;
-                }
+                sum += arr[right++];
+
+                if(sum === m){
+                    left++;
+                    right = left;
+                    sum = 0;
+                    cnt ++;
+                };
             }
             return cnt;
         };
