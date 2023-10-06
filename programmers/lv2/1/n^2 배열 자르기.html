@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+        링크 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/87390" target="_blank">n^2 배열 자르기</a>
+
+        정수 n, left, right가 주어집니다. 다음 과정을 거쳐서 1차원 배열을 만들고자 합니다.
+
+        n행 n열 크기의 비어있는 2차원 배열을 만듭니다.
+        i = 1, 2, 3, ..., n에 대해서, 다음 과정을 반복합니다.
+        1행 1열부터 i행 i열까지의 영역 내의 모든 빈 칸을 숫자 i로 채웁니다.
+        1행, 2행, ..., n행을 잘라내어 모두 이어붙인 새로운 1차원 배열을 만듭니다.
+        새로운 1차원 배열을 arr이라 할 때, arr[left], arr[left+1], ..., arr[right]만 남기고 나머지는 지웁니다.
+        정수 n, left, right가 매개변수로 주어집니다. 주어진 과정대로 만들어진 1차원 배열을 return 하도록 solution 함수를 완성해주세요.
+
+        제한사항
+        1 ≤ n ≤ 107
+        0 ≤ left ≤ right < n2
+        right - left < 105
+        입출력 예
+        n	left	right	result
+        3	2	5	[3,2,2,3]
+        4	7	14	[4,3,3,3,4,4,4,4]
+
+        ※ 입출력 예시는 상단의 링크에서 확인해주세요.
+    </pre>
+
+    <script>
+        /*
+            첫 풀이 실패 (core dumped)
+            function solution(n, left, right) {
+                let arr = new Array(n);
+                let num = 0; 
+                
+                for(let i = 0; i < n; i++){
+                    arr[i] = new Array(n);
+                    num = i + 1;
+                    for(let j = 0; j < n ; j++){
+                        if(j > i) num++;
+                        arr[i][j] = num;
+                    }
+                }
+                
+                const answer = arr.join(',').split(',').splice(left, right - left + 1).map(v => Number(v));
+                return answer;
+            }
+        */
+
+        // 1차원 배열로 풀어놓은것으로 바로 생각해보면 index값을 n으로 나눈값이 row가 되고, 둘의 나머지는 column이 된다. 이 두 값중 더 큰값의 + 1값이 해당 인덱스내 값이 된다.
+        function solution(n, left, right) {
+            const arr = [];
+            for(let i = left; i < right + 1; i++){
+                // 1차원 배열로 바꿨을때의 좌표값
+                let row = i / n;
+                let columns = i % n;
+                
+                arr.push(Math.floor(Math.max(row, columns)) + 1);
+            }
+            return arr;
+        }
+
+        console.log(3, 2, 5);
+    </script>
+</body>
+</html>

@@ -29,10 +29,63 @@
     </pre>
 
     <script>
-        function solution(){
+        function solution(str){
+            // 나의 풀이
+            // let strArr = [];
+            // let obj = {};
+            // let max = 0;
+            // let answer = '';
 
+            // const newStr = [...new Set(str.split(''))].sort();
+            // for(let i = 0; i < str.length; i++){
+            //     obj[[newStr[i]]] = 0
+            // }
+
+            // for(let j = 0; j < str.length; j++){
+            //     if(str.charAt(j) in obj){
+            //         obj[str.charAt(j)] += 1;
+            //         if(obj[str.charAt(j)] > max){
+            //             max = obj[str.charAt(j)];
+            //             answer = str.charAt(j);
+            //         }
+            //     }
+            // }
+
+            // map을 이용해서 다시 풀어본 풀이
+            let sH = new Map();
+            let max = Number.MIN_SAFE_INTEGER;
+            let answer = '';
+            for(let x of str){
+                if(sH.has(x)){
+                    sH.set(x, sH.get(x) + 1);
+
+                    if(sH.get(x) > max) {
+                        max = sH.get(x);
+                        answer = x;
+                    }
+
+                }else sH.set(x, 1);
+            }
+        
+            // 풀이 해설
+            // let answer;
+            // let sH = new Map();
+            // for(let x of str){
+            //  if(sH.has(x)) sH.set(x, sH.get(x) + 1);
+            // else sH.set(x, 1);
+            // }
+            // let max=Number.MIN_SAFE_INTEGER;
+            // for(let [key, val] of sH){
+                // if(val>max){
+                    // max=val;
+                    // answer=key;
+                // }
+            // }
+            return answer;
         }
-        console.log(solution());
+
+        let str="BACBACCACCBDEDE";
+        console.log(solution(str));
     </script>
 </body>
 </html>
