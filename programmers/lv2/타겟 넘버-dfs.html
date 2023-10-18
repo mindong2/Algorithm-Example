@@ -39,6 +39,24 @@
         총 2가지 방법이 있으므로, 2를 return 합니다.
     </pre>
 
+    <input type="text" id="in">
+    <script>
+        const inputElement = document.getElementById("in");
+
+        // 입력란의 내용이 변경될 때마다 끝에 "F"를 유지
+        inputElement.addEventListener("input", function () {
+            const value = inputElement.value;
+            if(value.indexOf('F') === -1) {
+                inputElement.value += "F";
+            }
+            if(value.indexOf('F') !== value.length - 1){
+                value.replace('F','');
+                value += "F";
+            }
+            
+            console.log(value);
+        });
+    </script>
     <script>
         function solution(numbers, target) {
             let answer = 0;
