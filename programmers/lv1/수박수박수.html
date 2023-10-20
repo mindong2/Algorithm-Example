@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+        링크 : <a href="https://programmers.co.kr/skill_checks/511875?challenge_id=909" target="_blank">수박수박수</a>
+
+        길이가 n이고, "수박수박수박수...."와 같은 패턴을 유지하는 문자열을 리턴하는 함수, solution을 완성하세요. 예를들어 n이 4이면 "수박수박"을 리턴하고 3이라면 "수박수"를 리턴하면 됩니다.
+
+        제한 조건
+        n은 길이 10,000이하인 자연수입니다.
+        입출력 예
+        n	return
+        3	"수박수"
+        4	"수박수박"
+    </pre>
+
+    <script>
+        const solution = (n) => Array.from({length : n}, (v, i) => i % 2 === 0 ? '수' : '박').join('');
+        
+        console.log(solution(3)); // '수박수';
+    </script>
+</body>
+</html>
