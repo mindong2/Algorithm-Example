@@ -41,29 +41,80 @@
     </pre>
 
     <script>
-        function solution(scoville, K) {
-            let answer = 0;
-            const scovilleCopy = scoville.slice()
-            let i = 0;
-            while(1){
-                console.log(scovilleCopy)
-                i++;
-                scovilleCopy.sort((a, b) => a - b);
+        class MinHeap {
+            constructor() {
+                this.heap = [];
+            }
 
-                let mix = scovilleCopy.shift() + (scovilleCopy[1] * 2);
-                scovilleCopy.shift();
+            size() {
+                return this.heap.length;
+            }
+                
+                // 값을 넣고, 오름차 순 정렬
+            push(value) {
+                this.heap.push(value);
+                let currentIndex = this.heap.length - 1;
 
-                if(mix >= K){
-                    return i;
+                while (
+                currentIndex > 0 &&
+                this.heap[currentIndex] < this.heap[Math.floor((currentIndex - 1) / 2)]
+                ) {
+                const temp = this.heap[currentIndex];
+                this.heap[currentIndex] = this.heap[Math.floor((currentIndex - 1) / 2)];
+                this.heap[Math.floor((currentIndex - 1) / 2)] = temp;
+                currentIndex = Math.floor((currentIndex - 1) / 2);
+                }
+            }
+
+                // 값을 빼고, 오름차 순 정렬
+            pop() {
+                if (this.heap.length === 0) return null;
+                if (this.heap.length === 1) return this.heap.pop();
+
+                const minValue = this.heap[0];
+                this.heap[0] = this.heap.pop();
+                let currentIndex = 0;
+
+                while (currentIndex * 2 + 1 < this.heap.length) {
+                let minChildIndex = currentIndex * 2 + 2 < this.heap.length && this.heap[currentIndex * 2 + 2] < this.heap[currentIndex * 2 + 1] ? currentIndex * 2 + 2 : currentIndex * 2 + 1;
+
+                if (this.heap[currentIndex] < this.heap[minChildIndex]) {
+                    break;
                 }
 
-                if(scovilleCopy.length === 0) break;
+                const temp = this.heap[currentIndex];
+                this.heap[currentIndex] = this.heap[minChildIndex];
+                this.heap[minChildIndex] = temp;
+                currentIndex = minChildIndex;
+                }
 
-                scovilleCopy.unshift(mix)
-
+                return minValue;
             }
-            return -1;
-        }
+
+            peek() {
+                return this.heap[0];
+            }
+            }
+
+            function solution(scoville, K) {
+            const minHeap = new MinHeap();
+
+            for (const sco of scoville) {
+                minHeap.push(sco);
+            }
+
+            let mixedCount = 0;
+
+            while (minHeap.size() >= 2 && minHeap.peek() < K) {
+                const first = minHeap.pop();
+                const second = minHeap.pop();
+                const mixedScov = first + second * 2;
+                minHeap.push(mixedScov);
+                mixedCount++;
+            }
+
+            return minHeap.peek() >= K ? mixedCount : -1;
+            }
         console.log(solution([1, 2, 3, 9, 10, 12], 7)); // 2
     </script>
 </body>
