@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <pre>
+        링크 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/12924" target="_blank">숫자의 표현</a>
+
+        Finn은 요즘 수학공부에 빠져 있습니다. 수학 공부를 하던 Finn은 자연수 n을 연속한 자연수들로 표현 하는 방법이 여러개라는 사실을 알게 되었습니다. 
+        예를들어 15는 다음과 같이 4가지로 표현 할 수 있습니다.
+
+        1 + 2 + 3 + 4 + 5 = 15
+        4 + 5 + 6 = 15
+        7 + 8 = 15
+        15 = 15
+        자연수 n이 매개변수로 주어질 때, 연속된 자연수들로 n을 표현하는 방법의 수를 return하는 solution를 완성해주세요.
+
+        제한사항
+        n은 10,000 이하의 자연수 입니다.
+        입출력 예
+        n	result
+        15	4
+        입출력 예 설명
+        입출력 예#1
+        문제의 예시와 같습니다.
+    </pre>
+
+    <script>
+      function solution(n) {
+        if (n === 1) return 1;
+        let arr = Array.from({ length: n }, (v, i) => i + 1);
+        let [left, right] = [0, 0];
+        let answer = 0;
+        while (right <= arr.length) {
+          if (left >= Math.ceil(n / 2)) break;
+          let sum = arr.slice(left, right + 1).reduce((acc, cur) => acc + cur, 0);
+          if (sum === n) {
+            answer++;
+            left++;
+            right++;
+            continue;
+          }
+          if (sum > n) {
+            left++;
+            continue;
+          }
+          right++;
+        }
+        // 자기자신의 값 + 1
+        return answer + 1;
+      }
+      console.log(solution(15)); // 4
+    </script>
+  </body>
+</html>
