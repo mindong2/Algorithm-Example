@@ -39,6 +39,41 @@
     </pre>
 
     <script>
+        
+
+    // 해시방식 (set을 만들어 자기 자신이 되지 않도록 한글자씩 조합해 있는지 없는지 검사)
+    function solution(phone_book) {
+        const set = new Set(phone_book);
+
+        for(const item of set){
+            let text = '';
+            for(let i = 0; i < item.length - 1; i++){
+                text += item[i];
+                if(set.has(text)) return false;
+            }
+        }
+
+        return true;
+
+    }
+
+    // 정렬방식 (정렬 후 바로 옆 글자가 현재 글자로 시작하는지 아닌지 검사)
+    // 바로 다음 글자가 접두사가 아니면 그 다음글자부터는 접두사일 수 없음 (정렬때문에)
+    // function solution(phone_book) {
+    //    const arr = phone_book.sort();
+    //
+    //    for(let i = 0; i < arr.length - 1; i++){
+    //        if(arr[i + 1].startsWith(arr[i])) return false;
+    //    }
+    //
+    //     return true;
+    //
+    // }
+
+
+        /*
+
+        // 이전 풀이
         function solution(phone_book) {
             phone_book.sort();
             
@@ -50,6 +85,7 @@
             return true;
             
         }
+            */
         console.log(solution(["119", "97674223", "1195524421"])); //false
     </script>
 </body>
