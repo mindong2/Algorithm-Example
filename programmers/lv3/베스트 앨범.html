@@ -48,6 +48,32 @@
     </pre>
 
     <script>
+
+        // gpt 피드백 받고 수정한 버전 -> 자료구조 명확하게 object식으로 
+        // function solution(genres, plays) {
+        //     const answer = [];
+        //     const map = new Map();
+        //     genres.forEach((v, i) => {
+        //         if(!map.has(v)) {
+        //             map.set(v, {total:0, songs: []})
+        //         }
+
+        //         const play = map.get(v);
+        //         play.total += plays[i];
+        //         play.songs.push({idx: i, play: plays[i]});
+        //     });
+
+        //     const sortedMap = [...map].sort((a, b) => b[1].total - a[1]. total);
+
+        //     sortedMap.forEach(v => {
+        //         const songs = v[1].songs.sort((a, b) => b.play - a.play || a.idx - b.idx);
+        //         answer.push(songs[0].idx);
+        //         if(songs.length !== 1) answer.push(songs[1].idx);
+        //     });
+
+        //     return answer;
+        // }
+
         function solution(genres, plays) {
             const map = new Map();
             const map2 = new Map();
